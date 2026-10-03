@@ -9,7 +9,7 @@
 <img src="https://img.shields.io/badge/Type-Academic%20Project-C59A3A?style=for-the-badge" alt="Academic">
 <img src="https://img.shields.io/badge/Interface-Console-123B5D?style=for-the-badge" alt="Console">
 
-**[About](#-about) · [Features](#-features) · [Architecture](#-architecture) · [Getting Started](#-getting-started) · [Courses](#-available-courses) · [OOP Concepts](#-oop-concepts) · [Scope](#-current-scope) · [License](#-license)**
+**[About](#-about) · [Features](#-features) · [Screenshots](#-screenshots) · [Architecture](#-architecture) · [Getting Started](#-getting-started) · [Courses](#-available-courses) · [OOP Concepts](#-oop-concepts) · [Scope](#-current-scope) · [License](#-license)**
 
 </div>
 
@@ -19,7 +19,7 @@
 
 **Digital Classroom Management System** is a console-based C++ project that demonstrates core Object-Oriented Programming concepts through a simple classroom scenario. Users log in as a **Student** or a **Teacher**, see a role-specific dashboard, and view the list of available courses.
 
-> This README describes the console-based C++ source in this repository. The project has no GUI, database, networking, or pre-built executable.
+> This is a console-based C++ project. It has no GUI, database, networking, or pre-built executable.
 
 ---
 
@@ -33,6 +33,27 @@
 | 🔄 | **Runtime polymorphism** | A `User*` pointer calls the correct `showDashboard()` |
 | 📚 | **Course list** | 5 `Course` objects stored in `vector<Course>` |
 | 💾 | **Memory handling** | Objects created with `new`, released with `delete` |
+
+---
+
+## 📸 Screenshots
+
+> Web interface preview of the same login and dashboard flow. Attendance, assignment and result figures are sample data.
+
+### Login
+
+<img width="1365" height="631" alt="image" src="https://github.com/user-attachments/assets/084a5ff9-43c8-4048-be04-c12e6b7fcea5" />
+
+
+### Student Dashboard
+
+<img width="1347" height="630" alt="image" src="https://github.com/user-attachments/assets/06d527bd-f343-4af1-b537-464da8136fdf" />
+
+
+### Teacher Dashboard
+
+<img width="1349" height="624" alt="image" src="https://github.com/user-attachments/assets/6a7db01b-9bbb-4ec7-be7c-6fcb46931e92" />
+
 
 ---
 
