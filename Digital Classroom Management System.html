@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Classroom Management System</title>
+<style>
+:root{--bg:#F3F6FA;--surface:#FFFFFF;--ink:#14263A;--muted:#5B6B7D;--line:#DCE3EC;--soft:#EAF0F7;--navy:#123B5D;--navy2:#0B2540;--gold:#C59A3A;--green:#0E9F6E;--blue:#00599C;--red:#DC2626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1623;--surface:#122234;--ink:#E6EDF5;--muted:#93A4B8;--line:#233549;--soft:#18304A;--green:#34D399;--blue:#5BA8E6;--red:#F87171}}
+:root[data-theme="dark"]{--bg:#0B1623;--surface:#122234;--ink:#E6EDF5;--muted:#93A4B8;--line:#233549;--soft:#18304A;--green:#34D399;--blue:#5BA8E6;--red:#F87171}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:0}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.hidden{display:none!important}
+
+/* Login */
+.login{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr}
+.brand{background:linear-gradient(150deg,var(--navy2),var(--navy));color:#fff;padding:56px;display:flex;flex-direction:column;justify-content:center;gap:28px;border-right:6px solid var(--gold)}
+.brand h1{font-size:44px;line-height:1.1}
+.brand p{color:#C9D8E8;max-width:440px;margin:0}
+.tree{display:grid;gap:10px;justify-items:start;font:600 14px Consolas,"Courier New",monospace}
+.tree span{padding:8px 14px;border-radius:8px}
+.tree .u{background:var(--gold);color:var(--navy2)}
+.tree .row{display:flex;gap:10px;margin-left:26px}
+.tree .s{background:#10B981;color:#06281D}.tree .t{background:#1C79C4;color:#fff}
+.formwrap{display:flex;align-items:center;justify-content:center;padding:32px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:32px;width:100%;max-width:420px}
+.card h2{font-size:26px}
+.muted{color:var(--muted)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--soft);padding:5px;border-radius:10px;margin:20px 0 4px}
+.seg button{border:0;background:transparent;padding:10px;border-radius:7px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:var(--ink)}
+label{display:block;font-weight:600;margin:16px 0 6px;font-size:14px}
+input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.btn{border:0;background:var(--navy);color:#fff;padding:12px 18px;border-radius:9px;font-weight:600}
+.btn:hover{background:var(--blue)}
+.btn.full{width:100%;margin-top:22px}
+.btn.ghost{background:var(--soft);color:var(--ink)}
+.btn.ghost:hover{background:var(--line)}
+.err{color:var(--red);font-size:14px;margin-top:12px;min-height:20px}
+.demo{margin-top:18px;padding:12px 14px;background:var(--soft);border-radius:9px;font-size:13px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.demo code{font-family:Consolas,monospace}
+
+/* App shell */
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.side{background:var(--navy2);color:#fff;padding:24px 16px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
+.side .logo{font:700 18px Georgia,serif;padding:4px 10px 18px;border-bottom:1px solid #ffffff22;margin-bottom:10px}
+.side .logo small{display:block;font:400 12px "Segoe UI",sans-serif;color:#93A9C2}
+.nav{border:0;background:transparent;color:#C9D8E8;text-align:left;padding:11px 12px;border-radius:8px;font-weight:500}
+.nav:hover{background:#ffffff14}
+.nav[aria-current="page"]{background:var(--gold);color:var(--navy2);font-weight:700}
+.side .out{margin-top:auto;border:1px solid #ffffff33;background:transparent;color:#fff;padding:10px;border-radius:8px}
+.side .out:hover{background:#ffffff14}
+main{padding:32px;max-width:1100px;width:100%}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.top h2{font-size:30px}
+.chip{display:inline-block;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:600;background:var(--soft)}
+.chip.s{background:#10B98122;color:var(--green)}.chip.t{background:#00599C22;color:var(--blue)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.stat{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:16px}
+.stat b{display:block;font:700 28px Georgia,serif}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+.code{font:600 13px Consolas,monospace;color:var(--gold)}
+.panel h3{font-size:18px;margin:6px 0 4px}
+.bar{height:8px;border-radius:5px;background:var(--soft);overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:var(--green)}
+.bar i.low{background:var(--gold)}
+table{width:100%;border-collapse:collapse}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:var(--soft);font-size:13px}
+tr:last-child td{border-bottom:0}
+td input{width:90px;padding:6px 8px}
+.badge{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700}
+.b-ok{background:#10B98122;color:var(--green)}.b-wait{background:#C59A3A28;color:#9A7420}.b-late{background:#DC262622;color:var(--red)}
+:root[data-theme="dark"] .b-wait{color:#E3B95B}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin-bottom:16px}
+.tools>div{flex:1;min-width:160px}.tools label{margin-top:0}
+.sw{position:relative;width:46px;height:26px;border-radius:99px;border:0;background:var(--line)}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s}
+.sw[aria-pressed="true"]{background:var(--green)}.sw[aria-pressed="true"]::after{left:23px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy2);color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;border-left:4px solid var(--green);z-index:9}
+.foot{margin-top:32px;color:var(--muted);font-size:13px}
+
+@media(max-width:860px){
+  .login{grid-template-columns:1fr}.brand{padding:32px 24px;border-right:0;border-bottom:6px solid var(--gold)}.brand h1{font-size:32px}
+  .app{grid-template-columns:1fr}
+  .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;padding:12px;align-items:center}
+  .side .logo{width:100%;border:0;padding:0 6px 6px;margin:0}
+  .side .out{margin:0 0 0 auto}
+  main{padding:20px 16px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="login" id="login">
+  <div class="brand">
+    <div>
+      <h1>Digital Classroom<br>Management System</h1>
+    </div>
+    <p>Sign in as a student or a teacher to open your dashboard. Built on the C++ OOP project from the University of Azad Jammu &amp; Kashmir.</p>
+  </div>
+  <div class="formwrap">
+    <div class="card">
+      <h2>Welcome back</h2>
+      <p class="muted" style="margin:6px 0 0">Choose your role and sign in.</p>
+      <div class="seg" role="group" aria-label="Role">
+        <button type="button" id="r-student" aria-pressed="true">Student</button>
+        <button type="button" id="r-teacher" aria-pressed="false">Teacher</button>
+      </div>
+      <label for="user">Username</label>
+      <input id="user" autocomplete="username">
+      <label for="pass">Password</label>
+      <input id="pass" type="password" autocomplete="current-password">
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn full" id="go" type="button">Sign in</button>
+      <div class="demo"><span>Demo: <code id="hint">student / student123</code></span><button class="btn ghost" id="fill" type="button" style="padding:6px 12px">Fill</button></div>
+    </div>
+  </div>
+</section>
+
+<div class="app hidden" id="app">
+  <aside class="side">
+    <div class="logo">Digital Classroom<small id="who"></small></div>
+    <nav id="nav" style="display:contents"></nav>
+    <button class="out" id="logout" type="button">Sign out</button>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<script>
+const COURSES=[["CS-201","Object Oriented Programming","Dr. Ahmed"],["CS-202","Data Structures and Algorithms","Dr. Ali"],["CS-203","Database Systems","Dr. Hamza"],["CS-204","Digital Logic Design","Dr. Usman"],["CS-205","Computer Organization","Dr. Bilal"]];
+const CREDS={student:["student","student123"],teacher:["teacher","teacher123"]};
+const PEOPLE=["Ayesha Khan","Bilal Raza","Fatima Noor","Hamza Iqbal","Sana Malik","Usman Tariq"];
+const ATT=[92,88,95,81,90];
+const MARKS=[88,79,91,84,76];
+let tasks=[
+ {c:"CS-201",t:"Inheritance and polymorphism problem set",d:"12 Oct",s:"Pending"},
+ {c:"CS-202",t:"Implement a binary search tree",d:"15 Oct",s:"Pending"},
+ {c:"CS-203",t:"ER diagram for a library system",d:"09 Oct",s:"Submitted"},
+ {c:"CS-204",t:"Combinational circuit worksheet",d:"02 Oct",s:"Late"},
+ {c:"CS-205",t:"Memory hierarchy short report",d:"20 Oct",s:"Pending"}];
+let present={};PEOPLE.forEach((p,i)=>present[p]=i!==3);
+let marks={};
+let S={role:"student",user:null,view:"courses",course:0};
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const grade=m=>m>=85?"A":m>=75?"B":m>=65?"C":"D";
+
+function setRole(r){
+  S.role=r;
+  $("r-student").setAttribute("aria-pressed",r==="student");
+  $("r-teacher").setAttribute("aria-pressed",r==="teacher");
+  $("hint").textContent=CREDS[r].join(" / ");
+  $("err").textContent="";
+}
+$("r-student").onclick=()=>setRole("student");
+$("r-teacher").onclick=()=>setRole("teacher");
+$("fill").onclick=()=>{$("user").value=CREDS[S.role][0];$("pass").value=CREDS[S.role][1];$("err").textContent=""};
+function login(){
+  const [u,p]=CREDS[S.role];
+  if($("user").value.trim()!==u||$("pass").value!==p){$("err").textContent="Invalid username or password for the "+S.role+" role.";return}
+  S.user=S.role;S.view="courses";
+  $("login").classList.add("hidden");$("app").classList.remove("hidden");
+  $("who").textContent=S.role==="student"?"Student portal":"Teacher portal";
+  render();
+}
+$("go").onclick=login;
+[$("user"),$("pass")].forEach(e=>e.addEventListener("keydown",k=>{if(k.key==="Enter")login()}));
+$("logout").onclick=()=>{S.user=null;$("pass").value="";$("app").classList.add("hidden");$("login").classList.remove("hidden")};
+
+function toast(m){
+  const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=m;
+  document.body.appendChild(t);setTimeout(()=>t.remove(),2200);
+}
+
+function render(){
+  const st=S.role==="student";
+  const items=[["courses",st?"View Courses":"Manage Courses"],["attendance",st?"View Attendance":"Manage Attendance"],["assignments",st?"View Assignments":"Manage Assignments"],["results",st?"View Results":"Manage Results"]];
+  $("nav").innerHTML=items.map(([k,l])=>`<button class="nav" data-v="${k}" ${S.view===k?'aria-current="page"':""}>${l}</button>`).join("");
+  $("nav").querySelectorAll(".nav").forEach(b=>b.onclick=()=>{S.view=b.dataset.v;render()});
+  const title=items.find(i=>i[0]===S.view)[1];
+  const chip=st?'<span class="chip s">Role: Student</span>':'<span class="chip t">Role: Teacher</span>';
+  $("main").innerHTML=`<div class="top"><div><h2>${title}</h2><p class="muted" style="margin:4px 0 0">${st?"Signed in as Student":"Signed in as Teacher"}</p></div>${chip}</div>${views[S.view]()}<p class="foot">C++ OOP Academic Project · UAJK · 2nd Semester. Attendance, assignment and result figures are sample data for demonstration.</p>`;
+  bind();
+}
+
+const views={
+courses(){
+  const st=S.role==="student";
+  const stats=`<div class="stats"><div class="stat"><b>5</b>Courses</div><div class="stat"><b>${st?"15":PEOPLE.length}</b>${st?"Credit hours":"Students"}</div><div class="stat"><b>${tasks.filter(t=>t.s==="Pending").length}</b>Open assignments</div></div>`;
+  return stats+`<div class="grid">`+COURSES.map((c,i)=>`<div class="panel"><div class="code">${c[0]}</div><h3>${c[1]}</h3><div class="muted">${c[2]}</div>${st?`<div class="bar"><i class="${ATT[i]<85?"low":""}" style="width:${ATT[i]}%"></i></div><div class="muted" style="font-size:13px;margin-top:6px">Attendance ${ATT[i]}%</div>`:`<div class="muted" style="font-size:13px;margin-top:10px">${PEOPLE.length} enrolled students</div>`}</div>`).join("")+`</div>`;
+},
+attendance(){
+  if(S.role==="student")return `<div class="grid">`+COURSES.map((c,i)=>`<div class="panel"><div class="code">${c[0]}</div><h3>${c[1]}</h3><div class="bar"><i class="${ATT[i]<85?"low":""}" style="width:${ATT[i]}%"></i></div><div class="muted" style="margin-top:8px">${ATT[i]}% present${ATT[i]<85?" · below 85%":""}</div></div>`).join("")+`</div>`;
+  const n=PEOPLE.filter(p=>present[p]).length;
+  return `<div class="tools"><div><label for="cs">Course</label><select id="cs">${COURSES.map((c,i)=>`<option value="${i}" ${S.course===i?"selected":""}>${c[0]} · ${c[1]}</option>`).join("")}</select></div><button class="btn" id="save" type="button">Save attendance</button></div>
+  <p class="muted">${n} of ${PEOPLE.length} present</p>
+  <div class="tw"><table><tr><th>Student</th><th>Status</th><th>Present</th></tr>${PEOPLE.map(p=>`<tr><td>${p}</td><td><span class="badge ${present[p]?"b-ok":"b-late"}">${present[p]?"Present":"Absent"}</span></td><td><button class="sw" data-p="${p}" aria-pressed="${present[p]}" aria-label="Toggle ${p}"></button></td></tr>`).join("")}</table></div>`;
+},
+assignments(){
+  const cls=s=>s==="Submitted"?"b-ok":s==="Late"?"b-late":"b-wait";
+  const list=`<div class="tw"><table><tr><th>Course</th><th>Assignment</th><th>Due</th><th>Status</th></tr>${tasks.map(t=>`<tr><td>${t.c}</td><td>${esc(t.t)}</td><td>${t.d}</td><td><span class="badge ${cls(t.s)}">${t.s}</span></td></tr>`).join("")}</table></div>`;
+  if(S.role==="student")return list;
+  return `<div class="panel" style="margin-bottom:16px"><div class="tools" style="margin:0"><div style="flex:2"><label for="nt">New assignment</label><input id="nt" placeholder="Title"></div><div><label for="nc">Course</label><select id="nc">${COURSES.map(c=>`<option>${c[0]}</option>`).join("")}</select></div><div><label for="nd">Due date</label><input id="nd" placeholder="e.g. 25 Oct"></div><button class="btn" id="add" type="button">Add</button></div></div>`+list;
+},
+results(){
+  if(S.role==="student"){
+    const avg=Math.round(MARKS.reduce((a,b)=>a+b)/5);
+    return `<div class="stats"><div class="stat"><b>${avg}%</b>Average</div><div class="stat"><b>${grade(avg)}</b>Overall grade</div></div><div class="tw"><table><tr><th>Course</th><th>Marks</th><th>Grade</th></tr>${COURSES.map((c,i)=>`<tr><td>${c[0]} · ${c[1]}</td><td>${MARKS[i]} / 100</td><td><span class="badge ${MARKS[i]>=75?"b-ok":"b-wait"}">${grade(MARKS[i])}</span></td></tr>`).join("")}</table></div>`;
+  }
+  const code=COURSES[S.course][0];
+  return `<div class="tools"><div><label for="cs">Course</label><select id="cs">${COURSES.map((c,i)=>`<option value="${i}" ${S.course===i?"selected":""}>${c[0]} · ${c[1]}</option>`).join("")}</select></div><button class="btn" id="saver" type="button">Save results</button></div>
+  <div class="tw"><table><tr><th>Student</th><th>Marks (0-100)</th><th>Grade</th></tr>${PEOPLE.map((p,i)=>{const v=marks[code+p]??[82,74,91,68,88,79][i];return `<tr><td>${p}</td><td><input type="number" min="0" max="100" value="${v}" data-m="${code+p}" aria-label="Marks for ${p}"></td><td><span class="badge b-ok">${grade(v)}</span></td></tr>`}).join("")}</table></div>`;
+}};
+
+function bind(){
+  const cs=$("cs");if(cs)cs.onchange=()=>{S.course=+cs.value;render()};
+  document.querySelectorAll(".sw").forEach(b=>b.onclick=()=>{present[b.dataset.p]=!present[b.dataset.p];render()});
+  if($("save"))$("save").onclick=()=>toast("Attendance saved for "+COURSES[S.course][0]);
+  if($("saver"))$("saver").onclick=()=>{document.querySelectorAll("[data-m]").forEach(i=>marks[i.dataset.m]=Math.max(0,Math.min(100,+i.value||0)));toast("Results saved for "+COURSES[S.course][0]);render()};
+  if($("add"))$("add").onclick=()=>{
+    const t=$("nt").value.trim();if(!t){toast("Enter an assignment title");return}
+    tasks.unshift({c:$("nc").value,t,d:$("nd").value.trim()||"TBA",s:"Pending"});render();toast("Assignment added");
+  };
+}
+</script>
+</body>
+</html>
