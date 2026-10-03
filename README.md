@@ -1,58 +1,69 @@
 
-# Digital Classroom Management System
+# 🎓 Digital Classroom Management System
 
-A C++ Object-Oriented Programming project developed as a 2nd Semester University Project.
+<p align="center">
+  <strong>A C++ Object-Oriented Programming Project</strong><br>
+  2nd Semester — BS Computer Science
+</p>
 
-The project demonstrates fundamental Object-Oriented Programming concepts through a simple Digital Classroom Management System with Student and Teacher roles and course management.
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-C%2B%2B-blue?style=for-the-badge&logo=cplusplus" alt="C++">
+  <img src="https://img.shields.io/badge/Paradigm-OOP-orange?style=for-the-badge" alt="OOP">
+  <img src="https://img.shields.io/badge/Semester-2nd%20Semester-green?style=for-the-badge" alt="Semester">
+  <img src="https://img.shields.io/badge/Project-Academic-purple?style=for-the-badge" alt="Academic Project">
+</p>
 
 ---
 
-## 📌 Project Overview
+## 📌 Overview
 
-The **Digital Classroom Management System** is a console-based C++ application designed to demonstrate the practical use of Object-Oriented Programming concepts.
+**Digital Classroom Management System** is a C++ Object-Oriented Programming project developed as a **2nd Semester University Project**.
+
+The project represents a simple academic environment containing different types of users and academic courses. It demonstrates the practical implementation of fundamental **C++ Object-Oriented Programming concepts** through a structured class hierarchy.
 
 The system contains a base `User` class with two derived classes:
 
 - `Student`
 - `Teacher`
 
-It also includes a separate `Course` class for representing academic courses.
-
-The project demonstrates inheritance, encapsulation, polymorphism, constructors, virtual functions, function overriding, dynamic memory, and object collections using `vector`.
+It also contains a separate `Course` class for representing academic courses.
 
 ---
 
 ## 🎯 Objectives
 
-- Demonstrate the fundamentals of C++ Object-Oriented Programming.
+- Demonstrate fundamental C++ Object-Oriented Programming concepts.
 - Implement classes and objects.
-- Demonstrate inheritance using Student and Teacher roles.
+- Demonstrate inheritance.
 - Implement runtime polymorphism.
-- Demonstrate encapsulation using access specifiers.
+- Demonstrate encapsulation.
 - Use constructors for object initialization.
-- Demonstrate function overriding and virtual functions.
-- Manage multiple Course objects using `vector`.
-- Implement a simple username and password based authentication system.
+- Demonstrate function overriding.
+- Use virtual functions.
+- Apply access specifiers.
+- Manage multiple objects using `vector`.
+- Implement simple role-based authentication.
 
 ---
 
 ## ✨ Features
 
-- Student Login
-- Teacher Login
-- Role Selection
-- Student Dashboard
-- Teacher Dashboard
-- Course Display
-- Runtime Polymorphism
-- Role-Based Dashboard Behavior
-- Multiple Course Objects using `vector`
+| Feature | Description |
+|---|---|
+| 🔐 Student Login | Authentication for Student role |
+| 🔐 Teacher Login | Authentication for Teacher role |
+| 👨‍🎓 Student Dashboard | Student-specific dashboard |
+| 👨‍🏫 Teacher Dashboard | Teacher-specific dashboard |
+| 📚 Course Display | Displays available academic courses |
+| 🔄 Runtime Polymorphism | Role-specific behavior through virtual functions |
+| 🧩 Object-Oriented Design | Uses classes, inheritance and polymorphism |
+| 📦 Vector of Objects | Stores multiple `Course` objects |
 
 ---
 
-## 🧠 Object-Oriented Programming Concepts
+# 🧠 Object-Oriented Programming Concepts
 
-### 1. Classes and Objects
+## 1. 📦 Classes and Objects
 
 The project contains the following classes:
 
@@ -61,15 +72,15 @@ The project contains the following classes:
 - `Teacher`
 - `Course`
 
-Objects are created from these classes to represent users and courses.
+These classes are used to create objects representing users and academic courses.
 
 ---
 
-### 2. Encapsulation
+## 2. 🔒 Encapsulation
 
 Encapsulation is demonstrated by controlling access to class data members.
 
-The `Course` class keeps its data members private:
+The `Course` class contains private data members:
 
 ```cpp
 class Course
@@ -81,13 +92,13 @@ private:
 };
 ````
 
-This prevents direct access to these members from outside the class.
+This keeps the internal data of the `Course` class protected from direct external access.
 
 ---
 
-### 3. Inheritance
+## 3. 🧬 Inheritance
 
-The `Student` and `Teacher` classes inherit from the `User` base class.
+`Student` and `Teacher` inherit from the `User` base class.
 
 ```cpp
 class Student : public User
@@ -97,13 +108,13 @@ class Student : public User
 class Teacher : public User
 ```
 
-This allows both derived classes to reuse the common properties of the `User` class.
+This allows both derived classes to reuse the common properties and behavior of the `User` class.
 
 ---
 
-### 4. Polymorphism
+## 4. 🔄 Polymorphism
 
-Runtime polymorphism is implemented using the virtual `showDashboard()` function.
+Runtime polymorphism is implemented through the virtual `showDashboard()` function.
 
 The base class contains:
 
@@ -111,35 +122,35 @@ The base class contains:
 virtual void showDashboard()
 ```
 
-The derived classes override it:
+The derived classes override this function:
 
 ```cpp
 void showDashboard() override
 ```
 
-A base-class pointer is then used:
+A base-class pointer is used:
 
 ```cpp
 User* currentUser = nullptr;
 ```
 
-The appropriate dashboard is selected at runtime.
+The appropriate dashboard is selected at runtime according to the actual object.
 
 ---
 
-### 5. Abstraction
+## 5. 🎭 Abstraction
 
 The `User` class provides a common structure for different types of users.
 
-Both Student and Teacher use the same base-class interface while providing their own dashboard behavior.
+`Student` and `Teacher` use the common functionality provided by the base class while providing their own dashboard behavior.
 
 ---
 
-### 6. Constructors
+## 6. 🏗️ Constructors
 
 Constructors are used to initialize objects.
 
-For example:
+### User Constructor
 
 ```cpp
 User(string n, string r)
@@ -149,11 +160,13 @@ User(string n, string r)
 }
 ```
 
-The `Student` and `Teacher` classes also use constructors:
+### Student Constructor
 
 ```cpp
 Student(string n) : User(n, "Student") {}
 ```
+
+### Teacher Constructor
 
 ```cpp
 Teacher(string n) : User(n, "Teacher") {}
@@ -161,39 +174,45 @@ Teacher(string n) : User(n, "Teacher") {}
 
 ---
 
-### 7. Function Overriding
+## 7. 🔁 Function Overriding
 
-The `Student` and `Teacher` classes override the `showDashboard()` function of the `User` class.
+Both `Student` and `Teacher` override the `showDashboard()` function of the `User` class.
 
 ```cpp
 void showDashboard() override
 ```
 
-Each class provides its own dashboard implementation.
+Each derived class provides its own implementation of the dashboard.
 
 ---
 
-### 8. Virtual Functions
+## 8. ⚡ Virtual Functions
 
-The `showDashboard()` function is declared as virtual in the base class:
+The `showDashboard()` function is declared as virtual in the `User` class:
 
 ```cpp
 virtual void showDashboard()
 ```
 
-This allows the correct derived-class function to be called through a `User` pointer.
+This allows the appropriate derived-class implementation to be called through a base-class pointer.
+
+The `User` destructor is also virtual:
+
+```cpp
+virtual ~User() {}
+```
 
 ---
 
-### 9. Access Specifiers
+## 9. 🔐 Access Specifiers
 
-The project uses different C++ access specifiers:
+The project uses the following C++ access specifiers:
 
 * `public`
 * `protected`
 * `private`
 
-The `User` class uses `protected` members:
+The `User` class uses protected members:
 
 ```cpp
 protected:
@@ -201,7 +220,7 @@ protected:
     string role;
 ```
 
-The `Course` class uses `private` members:
+The `Course` class uses private members:
 
 ```cpp
 private:
@@ -212,15 +231,17 @@ private:
 
 ---
 
-### 10. Dynamic Memory
+## 10. 💾 Dynamic Memory
 
-The project creates Student and Teacher objects dynamically using `new`.
+Student and Teacher objects are dynamically created using `new`.
+
+### Student
 
 ```cpp
 currentUser = new Student("Student");
 ```
 
-or:
+### Teacher
 
 ```cpp
 currentUser = new Teacher("Teacher");
@@ -234,47 +255,67 @@ delete currentUser;
 
 ---
 
-### 11. Object Collection using Vector
+## 11. 📚 Vector of Objects
 
-Multiple Course objects are stored using:
+The project uses:
 
 ```cpp
 vector<Course> courses;
 ```
 
-The project contains five sample courses.
+to store multiple `Course` objects.
+
+The courses are then processed using a range-based `for` loop:
+
+```cpp
+for (Course &course : courses)
+{
+    course.display();
+}
+```
 
 ---
 
-## 🏗️ Class Structure
+# 🏗️ Class Structure
 
 ```text
-                    User
-                   /    \
-                  /      \
-             Student    Teacher
+                    ┌───────────────┐
+                    │     User      │
+                    │  Base Class   │
+                    └───────┬───────┘
+                            │
+                 ┌──────────┴──────────┐
+                 │                     │
+          ┌──────▼──────┐       ┌──────▼──────┐
+          │   Student   │       │   Teacher   │
+          │ Derived     │       │ Derived     │
+          │ Class       │       │ Class       │
+          └─────────────┘       └─────────────┘
 
 
-                   Course
+                    ┌───────────────┐
+                    │    Course     │
+                    │     Class     │
+                    └───────────────┘
 ```
 
-### User
+### 👤 User
 
-The base class containing:
+Base class containing:
 
-* Name
-* Role
-* Dashboard function
+* `name`
+* `role`
+* `showDashboard()`
 
-### Student
+### 👨‍🎓 Student
 
-Derived from `User` and provides a Student Dashboard.
+Derived from `User` and provides the Student Dashboard.
 
-### Teacher
+### 👨‍🏫 Teacher
 
-Derived from `User` and provides a Teacher Dashboard.
+Derived from `User` and provides the Teacher Dashboard.
 
-### Course
+### 📚 Course
 
 Represents academic course information:
 
@@ -284,11 +325,15 @@ Represents academic course information:
 
 ---
 
-## 🔐 Authentication
+# 🔐 Authentication
 
-The project contains simple username and password authentication.
+The program asks the user for:
 
-### Student Account
+1. Username
+2. Password
+3. Role
+
+### 👨‍🎓 Student Account
 
 ```text
 Username: student
@@ -296,7 +341,7 @@ Password: student123
 Role: Student
 ```
 
-### Teacher Account
+### 👨‍🏫 Teacher Account
 
 ```text
 Username: teacher
@@ -304,23 +349,22 @@ Password: teacher123
 Role: Teacher
 ```
 
-If the entered username, password, or role is incorrect, the system displays:
+If the credentials or selected role are incorrect, the program displays:
 
 ```text
 Invalid username, password or role!
 ```
 
-> The credentials are hard-coded in the source code for educational demonstration purposes.
+> **Note:** The credentials are hard-coded in the source code for educational demonstration purposes.
 
 ---
 
-## 👨‍🎓 Student Dashboard
+# 👨‍🎓 Student Dashboard
 
-After successful Student authentication, the system displays:
+After successful Student authentication:
 
 ```text
 ===== STUDENT DASHBOARD =====
-
 Student: Student
 Role: Student
 
@@ -332,13 +376,12 @@ Role: Student
 
 ---
 
-## 👨‍🏫 Teacher Dashboard
+# 👨‍🏫 Teacher Dashboard
 
-After successful Teacher authentication, the system displays:
+After successful Teacher authentication:
 
 ```text
 ===== TEACHER DASHBOARD =====
-
 Teacher: Teacher
 Role: Teacher
 
@@ -350,25 +393,25 @@ Role: Teacher
 
 ---
 
-## 📚 Available Courses
+# 📚 Available Courses
 
-The project contains the following sample Course objects:
+The program creates five `Course` objects:
 
 | Course Code | Course                         | Teacher   |
 | ----------- | ------------------------------ | --------- |
-| CS-201      | Object Oriented Programming    | Dr. Ahmed |
-| CS-202      | Data Structures and Algorithms | Dr. Ali   |
-| CS-203      | Database Systems               | Dr. Hamza |
-| CS-204      | Digital Logic Design           | Dr. Usman |
-| CS-205      | Computer Organization          | Dr. Bilal |
+| `CS-201`    | Object Oriented Programming    | Dr. Ahmed |
+| `CS-202`    | Data Structures and Algorithms | Dr. Ali   |
+| `CS-203`    | Database Systems               | Dr. Hamza |
+| `CS-204`    | Digital Logic Design           | Dr. Usman |
+| `CS-205`    | Computer Organization          | Dr. Bilal |
 
 ---
 
-## 🔄 Runtime Polymorphism
+# 🔄 Runtime Polymorphism
 
-Runtime polymorphism is one of the main OOP implementations in this project.
+A major OOP implementation in the project is runtime polymorphism.
 
-The program creates a base-class pointer:
+A base-class pointer is declared:
 
 ```cpp
 User* currentUser = nullptr;
@@ -386,27 +429,34 @@ For a Teacher:
 currentUser = new Teacher("Teacher");
 ```
 
-The dashboard is then called through:
+The dashboard is then called through the base-class pointer:
 
 ```cpp
 currentUser->showDashboard();
 ```
 
-Because `showDashboard()` is virtual, the appropriate overridden function is executed according to the actual object.
+Because `showDashboard()` is virtual, the corresponding `Student` or `Teacher` implementation is executed at runtime.
 
 ---
 
-## 🛠️ Technologies Used
+# 🛠️ Technologies Used
+
+<p>
+  <img src="https://img.shields.io/badge/C%2B%2B-blue?style=flat-square&logo=cplusplus" alt="C++">
+  <img src="https://img.shields.io/badge/OOP-Object--Oriented%20Programming-orange?style=flat-square" alt="OOP">
+  <img src="https://img.shields.io/badge/STL-Vector-green?style=flat-square" alt="STL Vector">
+  <img src="https://img.shields.io/badge/Standard%20Library-C%2B%2B-lightgrey?style=flat-square" alt="C++ Standard Library">
+</p>
 
 * **C++**
 * **Object-Oriented Programming**
 * **C++ Standard Library**
-* **STL Vector**
+* **STL `vector`**
 * **Console Input/Output**
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 Digital-Classroom-Management-System/
@@ -419,62 +469,26 @@ Digital-Classroom-Management-System/
 
 ---
 
-## ▶️ How to Run
-
-Compile the source code using a C++ compiler:
-
-```bash
-g++ Digital_Classroom_Management_System.cpp -o DigitalClassroom
-```
-
-Run the program:
-
-```bash
-./DigitalClassroom
-```
-
----
-
-## 🖥️ Project Output
-
-### Student Dashboard
-
-> Screenshot will be added here.
-
-![Student Dashboard](screenshots/student-dashboard.png)
-
-### Teacher Dashboard
-
-> Screenshot will be added here.
-
-![Teacher Dashboard](screenshots/teacher-dashboard.png)
-
-### Available Courses
-
-> Screenshot will be added here.
-
-![Available Courses](screenshots/courses.png)
-
----
-
-## 📄 Project Documentation
+# 📄 Project Documentation
 
 A complete project report is included in this repository.
 
-The report explains:
+The documentation covers:
 
 * Project Overview
 * Problem Statement
 * Objectives
 * System Design
-* Classes
-* OOP Concepts
-* Inheritance
+* Classes and Objects
 * Encapsulation
+* Inheritance
 * Polymorphism
+* Abstraction
 * Constructors
-* Virtual Functions
 * Function Overriding
+* Virtual Functions
+* Access Specifiers
+* Dynamic Memory
 * Authentication
 * Course Management
 * Program Flow
@@ -483,25 +497,35 @@ The report explains:
 
 ---
 
-## 🎓 Academic Information
+# 🎓 Academic Information
 
-**Project:** Digital Classroom Management System
-**Course:** Object-Oriented Programming
-**Semester:** 2nd Semester
-**Program:** BS Computer Science
-**University:** University of Azad Jammu & Kashmir
-
----
-
-## 👨‍💻 Author
-
-**Nouman Majeed**
-
-BS Computer Science
-University of Azad Jammu & Kashmir
+| Detail         | Information                         |
+| -------------- | ----------------------------------- |
+| **Project**    | Digital Classroom Management System |
+| **Course**     | Object-Oriented Programming         |
+| **Semester**   | 2nd Semester                        |
+| **Program**    | BS Computer Science                 |
+| **University** | University of Azad Jammu & Kashmir  |
 
 ---
 
-## 📜 License
+# 👨‍💻 Author
+
+### Nouman Majeed
+
+**BS Computer Science**
+**University of Azad Jammu & Kashmir**
+
+---
+
+# 📜 License
 
 This project is developed for educational and academic purposes.
+
+---
+
+<p align="center">
+  <strong>Digital Classroom Management System</strong><br>
+  C++ • Object-Oriented Programming • 2nd Semester
+</p>
+```
